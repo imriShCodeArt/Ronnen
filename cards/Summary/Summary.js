@@ -1,30 +1,76 @@
+import { useState } from 'react'
+
+import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
+import Tab from '@mui/material/Tab'
+import Tabs from '@mui/material/Tabs'
 import Typography from '@mui/material/Typography'
+import Image from 'next/image'
 
 const Summary = () => {
-  const Stage = ({ title, body, price }) => (
-    <Grid flexGrow={1} textAlign={'center'} xs={12} md={6} item>
-      <Paper variant="outlined" elevation={0} sx={{ height: '100%' }}>
-        <Typography variant="h4">{title}</Typography>
-        <Typography>{body}</Typography>
+  const [step, setStep] = useState(0)
+  const Stage = ({ title, body, price, index }) => (
+    <TabPanel index={index} value={step}>
+      <Paper
+        variant="outlined"
+        elevation={0}
+        sx={{ height: '290px', py: '2em' }}
+      >
+        <div style={{ marginBottom: '4em' }}>
+          <Typography variant="h4">{title}</Typography>
+          <Typography>{body}</Typography>
+        </div>
         {price && (
           <Typography variant="h6">לשלב זה נדרשים כ-{price}</Typography>
         )}
       </Paper>
-    </Grid>
+    </TabPanel>
   )
 
   return (
-    <Grid py={'2.5em'} justifyContent={'center'} spacing={'1em'} container>
-      {steps.map((s, index) => (
-        <Stage {...s} key={index} />
-      ))}
-    </Grid>
+    <>
+      <Tabs onChange={(e, v) => setStep(v)} value={step}>
+        {steps.map((step, index) => (
+          <Tab key={index} label={step.title} value={index} />
+        ))}
+      </Tabs>
+      <Grid container>
+        <Grid xs={8} item>
+          {steps.map((s, index) => (
+            <Stage {...s} index={index} key={index} />
+          ))}
+        </Grid>
+        <Grid p={'1em'} item xs={4}>
+          <Image
+            src={'/demo-img.png'}
+            alt={'illustration'}
+            width={'500px'}
+            height={'410px'}
+          />
+        </Grid>
+      </Grid>
+    </>
   )
 }
 
 export default Summary
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && <Box sx={{ p: '1em' }}>{children}</Box>}
+    </div>
+  )
+}
 
 const steps = [
   {

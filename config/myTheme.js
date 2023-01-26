@@ -13,6 +13,7 @@ const myTheme = () => {
       },
       secondary: {
         main: '#F5AE2C',
+        light: '#FFE6B7',
       },
     },
     components: {

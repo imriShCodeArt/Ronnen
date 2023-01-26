@@ -34,7 +34,7 @@ const AvatarButton = ({ ...props }) => {
         <UserOptions />
       </Suspense>
     )
-    setWidth(e.screenX < breakpoints.values.md ? '80vw' : 250)
+    setWidth(e.screenX < breakpoints.values.xs ? '80vw' : 250)
     openMenu()
   }
   const handleSigninClick = (e) => {

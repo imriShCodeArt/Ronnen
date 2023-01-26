@@ -1,11 +1,11 @@
 import Card from '@mui/material/Card'
 import CardMedia from '@mui/material/CardMedia'
 
-const Heading = () => {
+const Heading = ({ low }) => {
   return (
     <Card elevation={0}>
       <CardMedia
-        height="100%"
+        height={!low ? '100%' : '200px'}
         component="img"
         image="/halom_cover.png"
         alt={'img'}

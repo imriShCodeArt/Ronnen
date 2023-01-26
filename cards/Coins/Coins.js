@@ -1,27 +1,17 @@
-import Chip from '@mui/material/Chip'
 import Stack from '@mui/material/Stack'
+import Cart from 'cards/Cart'
+import { useDialogContext } from 'shell/providers/Dialog'
+import Coin from './Coin'
+import items from './items'
 
 const Coins = () => {
-  const _suffix = 'ש"ח'
-  const num = 26
-  const items = [
-    'אות אחת',
-    '10 אותיות',
-    '50 אותיות',
-    '100 אותיות',
-    '500 אותיות',
-    '1000 אותיות',
-  ]
+  const dialog = useDialogContext()
+  const { setContent, openDialog, setWidth: setDialogWidth } = dialog || {}
 
-  const RenderItems = () => {
-    return items.map((item, index) => (
-      <Chip
-        color="info"
-        onClick={() => console.log(item)}
-        key={index}
-        label={item}
-      />
-    ))
+  function handleClick({ label, value, amount }) {
+    setContent(<Cart price={value} label={label} amount={amount} />)
+    setDialogWidth('80vw')
+    openDialog()
   }
 
   return (
@@ -31,7 +21,14 @@ const Coins = () => {
       sx={{ overflowX: 'auto' }}
       display={'flex'}
     >
-      <RenderItems />
+      {items.map(({ label, value, amount }, index) => (
+        <Coin
+          amount={amount}
+          onClick={() => handleClick({ label, value, amount })}
+          text={label}
+          key={index}
+        />
+      ))}
     </Stack>
   )
 }

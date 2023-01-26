@@ -1,33 +1,40 @@
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
 
-import PrimaryLayout from '../shell/containers/PrimaryLayout/PrimaryLayout'
 import { NextPageWithLayout } from './page'
 
-import Box from '@mui/material/Box'
+import ContactForm from 'cards/ContactForm'
+import Summary from 'cards/Summary'
+import Video from 'cards/Video'
 
-import Container from '@mui/material/Container'
+import Box from '@mui/material/Container'
+import Divider from '@mui/material/Divider'
+
 import HeadingSection from 'cards/HeadingSection'
 import StatusCards from 'cards/StatusCards'
 
-const Home: NextPageWithLayout = ({ html }) => {
-  const { locale } = useRouter()
+import PrimaryLayout from '../shell/containers/PrimaryLayout/PrimaryLayout'
+
+const Home: NextPageWithLayout = () => {
+  // const { locale } = useRouter()
 
   return (
-    <Box>
-      <HeadingSection />
-      <StatusCards />
-      <Container>
-        <iframe
-          width={'100%'}
-          height={'550px'}
-          src="https://www.youtube.com/embed/lCy1wy5UeW8"
-          title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-        ></iframe>
-      </Container>
-    </Box>
+    <>
+      <HeadingSection low={false} />
+      <Box>
+        <StatusCards />
+        <Divider
+          sx={{
+            borderBottomWidth: '1em',
+            width: '110vw',
+            position: 'relative',
+            left: '-12%',
+          }}
+        />
+        <Summary />
+        <Video />
+        <ContactForm />
+      </Box>
+    </>
   )
 }
 

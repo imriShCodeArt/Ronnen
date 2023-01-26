@@ -3,8 +3,6 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import MenuItem from '@mui/material/MenuItem'
 
-import LogoutIcon from '@mui/icons-material/LogoutOutlined'
-
 import { useRouter } from 'next/router'
 import { useUserContext } from 'shell/providers/User'
 
@@ -26,16 +24,12 @@ const UserNavOptions = () => {
         })}
       {options['footer'] && <Divider variant="inset" />}
       {options['footer'] &&
-        options.footer.map(() => {
+        options.footer.map(({ id, title, slug, icon, options }) => {
           return (
-            <>
-              <MenuItem>
-                <ListItemText>Logout</ListItemText>
-                <ListItemIcon>
-                  <LogoutIcon />
-                </ListItemIcon>
-              </MenuItem>
-            </>
+            <MenuItem onClick={() => navigate(`/${slug}`)} key={id}>
+              <ListItemText>{title}</ListItemText>
+              <ListItemIcon>{icon}</ListItemIcon>
+            </MenuItem>
           )
         })}
     </>

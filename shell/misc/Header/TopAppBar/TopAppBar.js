@@ -13,7 +13,7 @@ import AvatarContainer from './components/AvatarContainer'
 import CenterContainer from './components/CenterContainer'
 import RootContainer from './components/RootContainer'
 
-const NavBar = lazy(() => import('shell/misc/Header/NavBar'))
+const NavBar = lazy(() => import('shell/misc/Header/NavBar/'))
 
 import { useScreenContext } from 'shell/providers/Screen'
 import Context from './Context'
@@ -51,7 +51,6 @@ const TopAppBar = ({ navigation, header }) => {
   const [mode, setMode] = useState({
     elevation: 0,
     variant: 'outlined',
-    color: 'primary',
     position: sticky ? 'sticky' : 'static',
   })
   const [toolbarMode, setToolbarMode] = useState({
@@ -89,9 +88,11 @@ const TopAppBar = ({ navigation, header }) => {
       <AppBar
         component={'header'}
         {...{ ...mode }}
-        sx={{
+        sx={(theme) => ({
           border: 'none',
-        }}
+          backdropFilter: 'blur(10px)',
+          bgcolor: `${theme.palette.primary.main}95`,
+        })}
       >
         <Toolbar
           variant={toolbarMode.variant}
@@ -115,8 +116,8 @@ const TopAppBar = ({ navigation, header }) => {
         </Toolbar>
         <Suspense fallback={<div />}>{blockNavBar() && navBarElm}</Suspense>
         <MenuExpand content={expandableContent} open={open} />
-        <Coins />
       </AppBar>
+      <Coins />
     </Context.Provider>
   )
 }

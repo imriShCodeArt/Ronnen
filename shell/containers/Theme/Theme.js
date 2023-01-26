@@ -15,7 +15,7 @@ const Theme = ({ children, config }) => {
     <ThemeProvider theme={myTheme()}>
       <CssBaseline />
       <Context.Provider value={{ navigation, header, drawer }}>
-        <UserProvider user={user}>
+        <UserProvider options={user ? user.options : {}}>
           <DrawerProvider>
             <ScrollProvider>
               <DropMenuProvider>

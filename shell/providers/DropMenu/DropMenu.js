@@ -6,7 +6,7 @@ const DropMenu = ({ children }) => {
   const [content, setContent] = useState()
   const [anchorEl, setAnchorEl] = useState(null)
   const [open, setOpen] = useState(false)
-  const [width, setWidth] = useState(250)
+  const [width, setWidth] = useState(150)
   function openMenu() {
     setOpen(true)
   }
